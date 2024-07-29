@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container content">
+        <h2 class="text-center">Добро пожаловать в Nesmiyanovvv Соцсеть!</h2>
+        <div class="text-center">
+            <img src="{% static 'images/network.png' %}">
+
+            <div style="margin-top: 20px;">
+            {% if user.is_anonymous %}
+                <a href="{% url 'login' %}" class="btn btn-info">Войти</a>
+                <a href="{% url 'register' %}" class="btn btn-primary">Регистрация</a>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

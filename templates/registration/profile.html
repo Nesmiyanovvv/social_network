@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container content">
+        <h2>{{ selected_user.get_full_name }}</h2>
+
+        <div class="row" style="margin-left: 20px;">
+            <div class="col5">
+                {% if selected_user.profile.avatar.name %}
+                    <img src="{{ selected_user.profile.avatar.url }}" class="avatar-img img-thumbnail">
+                {% else %}
+                    <img src="{% static 'images/user.png' %}" class="avatar-img img-thumbnail">
+                {% endif %}
+                <br>
+                <br>
+                {% if selected_user.id == user.id %}
+                    <a href="{% url 'edit_profile' %}" class="btn btn-sm btn-info">Редактировать профиль</a>
+                {% endif %}
+            </div>
+            <div class="col">
+                <dl class="row">
+                    <dt class="col-sm-3 text-right">Полное имя</dt>
+                    <dd class="col-sm-9">{{ selected_user.get_full_name }}</dd>
+
+                    <dt class="col-sm-3 text-right">Email</dt>
+                    <dd class="col-sm-9">{{ selected_user.email }}</dd>
+
+                    <dt class="col-sm-3 text-right">Город</dt>
+                    <dd class="col-sm-9">{{ selected_user.profile.city }}</dd>
+
+                    <dt class="col-sm-3 text-right">Дата рождения</dt>
+                    <dd class="col-sm-9">{{ selected_user.profile.birth_date|date:"d M Y" }}</dd>
+
+                    <dt class="col-sm-3 text-right">Пол</dt>
+                    <dd class="col-sm-9">{{ selected_user.profile.get_gender_display }}</dd>
+
+                    <dt class="col-sm-3 text-right">Статус отношений</dt>
+                    <dd class="col-sm-9">{{ selected_user.profile.get_relationship_display }}</dd>
+
+                    <dt class="col-sm-3 text-right">О себе</dt>
+                    <dd class="col-sm-9"><em style="font-family: 'Times New Roman', serif;">{{ selected_user.profile.bio|linebreaks }}</em></dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+{% endblock %}
